@@ -1,2 +1,4 @@
 # watermark-service
-Service for watermarking documents
+
+Service to watermark documents from a global publishing company that publishes books and journals. Book publications include topics in business, science and media. Journals don’t include any specific topics. A document (books, journals) has a title, author and a watermark
+property. An empty watermark property indicates that the document has not been watermarked yet. This service is asynchronous.For a given content document the service should return a ticket, which can be used to poll the status of processing. If the watermarking is finished the document can be retrieved with the ticket. The watermark of a book or a journal is identified by setting the watermark property of the object. For a book the watermark includes the properties content, title, author and topic. The journal watermark includes the content, title and author.
