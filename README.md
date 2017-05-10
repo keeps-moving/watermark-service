@@ -10,30 +10,30 @@ Service to watermark documents from a global publishing company that publishes b
 * MAVEN 3
 
 -For building, go into the root directory of the project (watermark-service) and execute: <p>
-<i>mvn clean install</i>
+```mvn clean install```
 
 -For run Integration Test:
-<i>mvn verify -Pintegration-tests</i>
+```mvn verify -Pintegration-tests```
 
 -For start the service:
-<i>java -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n -jar target/watermark-service-0.0.1-SNAPSHOT.jar</i>
+```java -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n -jar target/watermark-service-0.0.1-SNAPSHOT.jar```
 
 # how to use
 
 * Watermarking a book:
 Do a POST with a book description using JSON format to http://localhost:8080/services/watermark/book. The ticket for getting the watermarked document will be in the body of the response.</br>
 Example:</br>
-<i>curl -vX POST --header "Content-Type: application/json" http://localhost:8080/services/watermark/book   -d "{\"id\":\"10034\",  \"title\":\"Equilibrio Distante\",\"author\":\"Renato Russo\",\"topic\":\"MEDIA\"}"</i>
+```curl -vX POST --header "Content-Type: application/json" http://localhost:8080/services/watermark/book   -d "{\"id\":\"10034\",  \"title\":\"Equilibrio Distante\",\"author\":\"Renato Russo\",\"topic\":\"MEDIA\"}"```
 
 Obs: Valid topics are "MEDIA", "SCIENCE" and "BUSINESS".
 
 * Watermarking a journal:
 Do a POST with a journal description using JSON format to http://localhost:8080/services/watermark/journal. The ticket for getting the watermarked document will be in the body of the response.</br>
 Example:</br>
-<i>curl -vX POST --header "Content-Type: application/json" http://localhost:8080/services/watermark/journal   -d "{\"id\":\"20034\", \"title\":\"Como Nossos Pais\",\"author\":\"Elis Regina\",\"topic\":\"SCIENCE\"}"</i>
+```curl -vX POST --header "Content-Type: application/json" http://localhost:8080/services/watermark/journal   -d "{\"id\":\"20034\", \"title\":\"Como Nossos Pais\",\"author\":\"Elis Regina\",\"topic\":\"SCIENCE\"}"```
 
 * Checking status of a watermarking processing:</br>
-Do a GET to <i>http://localhost:8080/services/watermark/status/{ticket}</i> and the result will be PROCESSING or NOT_PROCESSING
+Do a GET to ```http://localhost:8080/services/watermark/status/{ticket}``` and the result will be PROCESSING or NOT_PROCESSING
 
 * Retrieve the watermarked document:</br>
-Do a GET to <i>http://localhost:8080/services/watermark/{ticket}</i> and the result is the document in JSON format.
+Do a GET to ```http://localhost:8080/services/watermark/{ticket}``` and the result is the document in JSON format.
