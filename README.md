@@ -30,7 +30,7 @@ Obs: Valid topics are "MEDIA", "SCIENCE" and "BUSINESS".
 * Watermarking a journal:
 Do a POST with a journal description using JSON format to http://localhost:8080/services/watermark/journal. The ticket for getting the watermarked document will be in the body of the response.</br>
 Example:</br>
-<i>curl -vX POST --header "Content-Type: application/json" http://localhost:8080/services/watermark/journal   -d "{\"id\": \"20034\", \"author\": \"Elis Regina\", \"title\": \"Como Nossos Pais\", \"topic\": \"SCIENCE\"}"</i>
+<i>curl -vX POST --header "Content-Type: application/json" http://localhost:8080/services/watermark/journal   -d "{\"id\":\"20034\", \"title\":\"Como Nossos Pais\",\"author\":\"Elis Regina\",\"topic\":\"SCIENCE\"}"</i>
 
 * Checking status of a watermarking processing:</br>
 Do a GET to <i>http://localhost:8080/services/watermark/status/{ticket}</i> and the result will be PROCESSING or NOT_PROCESSING
