@@ -4,16 +4,21 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.springer.nature.watermark.core.model.Book;
 import com.springer.nature.watermark.core.model.DocumentType;
 import com.springer.nature.watermark.core.model.Journal;
 import com.springer.nature.watermark.core.model.Topic;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -21,25 +26,31 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Tests the full flow, started in the rest interface -{@link com.springer.nature.watermark.service.rest.WatermarkController}.
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 public class WatermarkServiceRestIT {
+     
+    private String baseUrl =  "/services/watermark";
     
-    private String baseUrl =  "http://localhost:8080/services/watermark";
+    @Autowired
+    private TestRestTemplate restTemplate;
     
-    private RestTemplate restTemplate = new RestTemplate();
-    
-    private int millisecondsSleeping = 500;
-    
-       
+    private int millisecondsSleeping = 500;  
+  
     @Test
     public void watermarkingBook() throws Exception{	
+	
+	 // difere no metodo sobrescrito
+	
+	System.out.println(new Gson().toJson(new Book("123","Title1","Author Author", Topic.SCIENCE)));
 	//sending a request for watermarking a book
 	ResponseEntity<String> postBook = restTemplate.postForEntity(baseUrl + "/book", new Book("123","Title1","Author Author", Topic.SCIENCE), String.class);
 	
 	//getting the ticket used for checking the status of processing
 	String ticket = postBook.getBody();
 	
-	String status = "RUNNING";
-	while("RUNNING".equalsIgnoreCase(status)){
+	String status = "PROCESSING";
+	while("PROCESSING".equalsIgnoreCase(status)){
 	    TimeUnit.MILLISECONDS.sleep(millisecondsSleeping);
 	    //Checking if the generation of the watermark has ended
 	    status = restTemplate.getForObject(baseUrl + "/status/" + ticket, String.class);	    
@@ -66,8 +77,8 @@ public class WatermarkServiceRestIT {
 	//getting the ticket used for checking the status of processing
 	String ticket = postJournal.getBody();
 	
-	String status = "RUNNING";
-	while("RUNNING".equalsIgnoreCase(status)){
+	String status = "PROCESSING";
+	while("PROCESSING".equalsIgnoreCase(status)){
 	    TimeUnit.MILLISECONDS.sleep(millisecondsSleeping);
 	    status = restTemplate.getForObject(baseUrl + "/status/" + ticket, String.class);	    
 	}

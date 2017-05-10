@@ -29,7 +29,7 @@ public class WatermarkController {
 
     @RequestMapping(value = "/watermark/status/{ticket}", method = RequestMethod.GET)
     public @ResponseBody String getWatermarkingStatus(@PathVariable String ticket) {
-	return watermarker.isProcessing(ticket) ? "RUNNING" : "NO_RUNNING";
+	return watermarker.isProcessing(ticket) ? "PROCESSING" : "NO_PROCESSING";
     }
 
     @RequestMapping(value = "/watermark/book", method = RequestMethod.POST)

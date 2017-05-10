@@ -14,13 +14,14 @@ public abstract class Document {
 
     private HashMap<String, String> watermark;
     
-    public Document(String id, String title, String author) {
+    public Document(String id, String title, String author, HashMap<String, String> watermark) {
 	Assert.assertNotNull("Null not allowed", id);
 	Assert.assertNotNull("Null not allowed", title);
 	Assert.assertNotNull("Null not allowed", author);
 	this.id = id;
 	this.title = title;
-	this.author = author;	
+	this.author = author;
+	this.watermark = watermark;
     }
 
     public String getId() {
