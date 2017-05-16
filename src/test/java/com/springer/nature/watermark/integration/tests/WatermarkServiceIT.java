@@ -75,7 +75,7 @@ public class WatermarkServiceIT {
 	assertTrue(ticket_2, service.isProcessing(ticket_2));
 	assertTrue(ticket_3, service.isProcessing(ticket_3));
 	
-	TimeUnit.MILLISECONDS.sleep(milisseconds + 500);
+	TimeUnit.MILLISECONDS.sleep(milisseconds * 3);
 	
 	assertFalse(ticket_1, service.isProcessing(ticket_1));
 	assertFalse(ticket_2, service.isProcessing(ticket_2));
