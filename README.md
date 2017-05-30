@@ -39,7 +39,7 @@ Obs: Valid topics are "MEDIA", "SCIENCE" and "BUSINESS".
 Do a POST with a journal description using JSON format to http://localhost:8080/services/watermark/journal. The ticket for getting the watermarked document will be in the body of the response.</br>
 Example:</br>
 ```
-curl -vX POST --header "Content-Type: application/json" http://localhost:8080/services/watermark/journal   -d "{\"id\":\"20034\", \"title\":\"Como Nossos Pais\",\"author\":\"Elis Regina\",\"topic\":\"SCIENCE\"}"
+curl -vX POST --header "Content-Type: application/json" http://localhost:8080/services/watermark/journal   -d "{\"id\":\"20034\", \"title\":\"Como Nossos Pais\",\"author\":\"Elis Regina\"}"
 ```
 
 * Checking status of a watermarking processing:</br>
